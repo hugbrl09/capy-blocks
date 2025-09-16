@@ -1,97 +1,157 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 export const styles = StyleSheet.create({
+  /* ROOT */
   bg: { flex: 1 },
-  safe: { flex: 1, paddingHorizontal: 16 },
+  safe: { flex: 1 },
+
+  /* TOP BAR */
   topRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: 30,
+    paddingHorizontal: 16,
   },
-  logo: { width: 150, height: 64 },
-  topButtons: { flexDirection: 'row', gap: 10 },
+  logo: { width: 140, height: 70 },
+  topButtons: { flexDirection: 'row', gap: 12 },
   iconBtn: {
-    width: 44, height: 44, borderRadius: 10,
-    backgroundColor: 'rgba(0,0,0,0.35)',
-    alignItems: 'center', justifyContent: 'center',
+    width: 48,
+    height: 42,
+    borderRadius: 10,
+    backgroundColor: '#2D3440',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.35,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+    ...Platform.select({ android: { elevation: 6 } }),
   },
-  icon: { width: 22, height: 22, tintColor: '#FFF' },
+  icon: { width: 20, height: 20, tintColor: '#FFF' },
 
+  /* CENTER CAPY */
   centerWrap: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    paddingBottom: 24,
+    justifyContent: 'center',
   },
-  capy: { width: 300, height: 220 },
+  capy: {
+    width: '25%',       // responsive for phones
+    aspectRatio: 1,     // keeps shape balanced
+  },
+
+  /* BADGE */
   badge: {
     position: 'absolute',
-    bottom: 24,
-    backgroundColor: '#FF4D4D',
-    borderRadius: 20,
-    borderWidth: 3,
-    borderColor: '#FFC83D',
-    width: 44, height: 44,
-    alignItems: 'center', justifyContent: 'center',
+    bottom: '10%',
+    alignSelf: 'center',
+    width: 56,
+    height: 68,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  badgeText: { fontSize: 16, fontWeight: '800', color: '#FFF' },
+  badgeBg: { position: 'absolute', width: '100%', height: '100%' },
+  badgeText: {
+    fontSize: 22,
+    fontWeight: '900',
+    color: '#FFE86B',
+    textShadowColor: '#7A0A0A',
+    textShadowRadius: 4,
+    textShadowOffset: { width: 0, height: 2 },
+  },
 
-  bottomRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    marginBottom: 20,
-  },
+  /* MISSIONS (absolute bottom-left) */
   missionsBtn: {
+    position: 'absolute',
+    left: 12,
+    bottom: 14,
     flexDirection: 'column',
     alignItems: 'center',
-    gap: 6,
+    gap: 4,
+    backgroundColor: '#1D232D',
+    borderRadius: 10,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
   },
-  missionIcon: {
-    width: 64, height: 64,
-  },
+  missionIcon: { width: 40, height: 40 },
   missionLabel: {
-    fontSize: 12, color: '#FFF', fontWeight: '700',
+    fontSize: 11,
+    color: '#FFF',
+    fontWeight: '800',
     textShadowColor: 'rgba(0,0,0,0.35)',
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 4,
   },
 
-  playWrap: { },
+  /* PLAY (absolute bottom-right) */
+  playWrap: {
+    position: 'absolute',
+    right: 12,
+    bottom: 16,
+  },
+
   playCard: {
-    width: 280, height: 92,
-    borderRadius: 14,
-    backgroundColor: '#FFD33D',
-    borderWidth: 4, borderColor: '#C49E22',
-    paddingLeft: 70,
-    alignItems: 'center', justifyContent: 'center',
+    width: 220,                // fixed width (good for phones)
+    height: 80,                // fixed height for a card look
+    borderRadius: 12,
+    backgroundColor: '#F5C11F',
+    borderWidth: 5,
+    borderColor: '#151515',
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'relative',
     shadowColor: '#000',
     shadowOpacity: 0.25,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 6,
-    elevation: 4,
+    ...Platform.select({ android: { elevation: 4 } }),
   },
-  playStrip: {
+
+  playInner: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  /* PROGRESS BLOCKS ABOVE THE CARD */
+  progressRow: {
     position: 'absolute',
-    left: 10, top: 20, bottom: 20,
-    width: 40,
-    borderRadius: 8,
-    borderWidth: 3, borderColor: '#1A1A1A',
-    backgroundColor: '#E5E5E5',
-    overflow: 'hidden',
+    left: 16,
+    right: 44,
+    top: -22,
+    height: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
   },
-  playStripFill: { flex: 1, backgroundColor: '#E32626' },
+  progressBlock: {
+    width: 22,
+    height: 16,
+    borderRadius: 3,
+    backgroundColor: '#2B2F38',
+    borderWidth: 2,
+    borderColor: '#0E0E0E',
+  },
+  progressFilled: { backgroundColor: '#F58D21' },
+
+  playLabel: {
+    fontSize: 26,
+    fontWeight: '900',
+    color: '#FFFFFF',
+    letterSpacing: 0.5,
+    textShadowColor: '#151515',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 3,
+  },
+
+  /* STAR OVERLAP */
   star: {
     position: 'absolute',
-    right: 10, top: -10,
-    width: 28, height: 28,
-  },
-  playLabel: {
-    fontSize: 28, fontWeight: '900', color: '#2A2A2A', letterSpacing: 1,
-    textShadowColor: 'rgba(255,255,255,0.35)',
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 2,
+    right: -12,
+    top: -14,
+    width: 32,
+    height: 32,
   },
 });
